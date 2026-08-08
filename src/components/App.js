@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import "../styles/App.css";
 
@@ -7,14 +8,14 @@ class App extends Component {
 
     this.state = {
       renderBall: false,
-      posi: 0,
       ballPosition: {
         left: "0px"
       }
     };
 
-    this.renderChoice = this.renderBallOrButton.bind(this);
+    // Bind methods so `this` refers to the component
     this.buttonClickHandler = this.buttonClickHandler.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   buttonClickHandler() {
@@ -25,12 +26,19 @@ class App extends Component {
 
   handleKeyDown(event) {
     if (event.keyCode === 39) {
-    this.setState((prevState) => ({
-      ballPosition: {
-        left: `${parseInt(prevState.ballPosition.left, 10) + 5}px`
-      }
-    }));
-  }
+      this.setState((prevState) => {
+        const currentPosition = parseInt(
+          prevState.ballPosition.left,
+          10
+        );
+
+        return {
+          ballPosition: {
+            left: `${currentPosition + 5}px`
+          }
+        };
+      });
+    }
   }
 
   componentDidMount() {
@@ -48,7 +56,7 @@ class App extends Component {
           className="ball"
           style={{
             position: "absolute",
-            ...this.state.ballPosition
+            left: this.state.ballPosition.left
           }}
         ></div>
       );
@@ -74,3 +82,4 @@ class App extends Component {
 }
 
 export default App;
+
