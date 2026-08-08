@@ -24,13 +24,13 @@ class App extends Component {
   }
 
   handleKeyDown(event) {
-    if (event.key === "ArrowRight" && event.keyCode === 39) {
-      this.setState((prevState) => ({
-        ballPosition: {
-          left: `${parseInt(prevState.ballPosition.left) + 5}px`
-        }
-      }));
-    }
+    if (event.keyCode === 39) {
+    this.setState((prevState) => ({
+      ballPosition: {
+        left: `${parseInt(prevState.ballPosition.left, 10) + 5}px`
+      }
+    }));
+  }
   }
 
   componentDidMount() {
